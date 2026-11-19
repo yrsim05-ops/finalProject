@@ -1,20 +1,20 @@
 #include <stdio.h>
-#define WIDTH 21
-typedef struct {
-    int playerX, score, penalty, running;
-} Game;
-void initGame(Game* game)
+#include <windows.h>
+void moveCursor(int x, int y)
 {
-    if (game == NULL) return;
-    game->playerX = WIDTH / 2;
-    game->score = 0;
-    game->penalty = 0;
-    game->running = 1;
+    COORD position;
+    if (x < 0 || y < 0)
+        return;
+    position.X = (SHORT)x;
+    position.Y = (SHORT)y;
+    SetConsoleCursorPosition(
+        GetStdHandle(STD_OUTPUT_HANDLE), position);
 }
 int main(void)
 {
-    Game game = { 20, 0, 5, 0 };
-    initGame(&game);
-    printf("%d %d %d %d\n", game.playerX, game.score, game.penalty, game.running);
+    moveCursor(0, 0);
+    moveCursor(5, 3);
+    printf("A");
+    getchar();
     return 0;
 }
